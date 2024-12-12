@@ -13,4 +13,6 @@ ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 COPY backend /app/backend
 
+EXPOSE 8000
+
 CMD ["python", "-m", "backend"]
