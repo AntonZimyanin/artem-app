@@ -1,6 +1,6 @@
 services:
   backend:
-    build: ./backend
+    build: .
     volumes:
       - ./backend:/srv/app
     ports:
@@ -10,9 +10,9 @@ services:
       - frontend
   frontend:
     build:
-      context: ./frontend
+      context: ./schedule
     volumes:
-      - ./frontend:/srv/app
+      - ./schedule:/srv/app
     ports:
       - "3000:3000"
       - "35729:35729"

@@ -1,15 +1,16 @@
 # Отдельный сборочный образ, чтобы уменьшить финальный размер образа
-FROM python:3.9-slim-bullseye as compile-image
+FROM python:3.10-slim-bullseye as compile-image
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-COPY requirements.txt .
+COPY req.txt .
 RUN pip install --no-cache-dir --upgrade pip \
- && pip install --no-cache-dir -r requirements.txt
+ && pip install --no-cache-dir -r req.txt
 
 # Окончательный образ
-FROM python:3.9-slim-bullseye
+FROM python:3.10-slim-bullseye
 COPY --from=compile-image /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
-COPY bot /app/bot
-CMD ["python", "-m", "bot"]
+COPY backend /app/backend
+
+CMD ["python", "-m", "backend"]
