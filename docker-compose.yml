@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/srv/app
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+      - frontend
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/srv/app
+    ports:
+      - "3000:3000"
+      - "35729:35729"
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:
