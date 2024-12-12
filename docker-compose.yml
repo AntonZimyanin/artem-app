@@ -1,6 +1,8 @@
 services:
   backend:
     build: .
+    container_name: backend
+    command: python -m backend
     volumes:
       - ./backend:/srv/app
     ports:
@@ -11,10 +13,12 @@ services:
   frontend:
     build:
       context: ./schedule
+    container_name: frontend
+    command: npm run dev 
     volumes:
       - ./schedule:/srv/app
     ports:
-      - "3000:3000"
+      - "5173:5173"
       - "35729:35729"
     networks:
       - frontend
