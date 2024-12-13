@@ -11,17 +11,17 @@ services:
       - backend
       - frontend
   frontend:
+    stdin_open: true
+    command: npm run dev
     build:
-      context: ./schedule
-    container_name: frontend
-    command: npm run dev 
-    volumes:
-      - ./schedule:/srv/app
+      context: ./schedule/
+      dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-      - "35729:35729"
-    networks:
-      - frontend
+      - '5173:5173'
+    volumes:
+      - ./schedule:/app
+      - /app/node_modules
+
 
 networks:
   backend:

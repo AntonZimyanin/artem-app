@@ -1,13 +1,16 @@
-FROM node:lts-slim
+FROM node:16-alpine
 
-WORKDIR /srv/app/
+WORKDIR '/app'
 
-ENV PATH /srv/app/node_modules/.bin:$PATH
-
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json .
 RUN npm install
+
+COPY . .
+
+RUN chown -R root:root /app
+
+USER root
 
 EXPOSE 5173
 
-COPY . ./
+CMD [ "npm", "run", "dev"]
